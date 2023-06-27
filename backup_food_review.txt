@@ -145,7 +145,7 @@ def delete_food_reviews(connection):
         cursor.execute(sql, list)
         connection.commit()
     except:
-         print("sin city wasn't made for you")
+         print("sin city wasn't made for you?")
 
 
 def update_food_review(connection):
