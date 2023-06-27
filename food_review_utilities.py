@@ -1,15 +1,8 @@
 import sqlite3
 
-database_file = 'food_review.db'
-
-connection = sqlite3.connect(database_file)
-
-cursor = connection.cursor()
-
-
 def show_menu(connection):
     '''shows items in the menu'''
-
+    cursor = connection.cursor()
     sql = "select * from dishes"
     cursor.execute(sql)
     result = cursor.fetchall()
@@ -20,7 +13,7 @@ def show_menu(connection):
 
 def show_food_reviews(connection):
     '''shows food reviews'''
-
+    cursor = connection.cursor()
     sql = "select user_name, dish_name, date, review from reviews_vw"
     cursor.execute(sql)
     result = cursor.fetchall()
@@ -31,7 +24,7 @@ def show_food_reviews(connection):
 
 def search_menu(connection):
     '''searches the menu'''
-
+    cursor = connection.cursor()
     try:
         prompt = {1: 'dish_name', 2: 'price', 3: 'dietary_info'}
         answer_1 = int(input("select out of 1. dish_name, 2. price budget, 3. dietary_info: "))
@@ -56,7 +49,7 @@ def search_menu(connection):
 
 def search_food_review(connection):
     '''searches in the food reviews'''
-
+    cursor = connection.cursor()
     try:
         prompt = {1: 'user_name', 2: 'date', 3: 'dish_name'}
         answer_1 = input("select out of 1. user_name, 2. date, 3. dish_name: ")
@@ -81,7 +74,7 @@ def search_food_review(connection):
 
 def insert_user_food_review(connection):
     '''creates new users'''
-
+    cursor = connection.cursor()
     user_name = input('enter a user_name: ')
     gmail = input('enter a gmail: ')
     phone_number = input('enter a phone_number: ')
@@ -95,7 +88,7 @@ def insert_user_food_review(connection):
 
 def insert_review_food_review(connection):
     '''creates new food reviews'''
-
+    cursor = connection.cursor()
     try:
         dish_name = input('what is the name of the dish?: ').lower()
         sql_1 = 'select dish_id from dishes where lower(dish_name) = ?'
@@ -125,7 +118,7 @@ def insert_review_food_review(connection):
 
 def delete_food_reviews(connection):
     '''deletes food reviews'''
-
+    cursor = connection.cursor()
     try: 
         dish_name = input('what is the name of the dish?: ')
         sql_1 = 'select dish_id from dishes where lower(dish_name) = ?'
@@ -150,7 +143,7 @@ def delete_food_reviews(connection):
 
 def update_food_review(connection):
     ''''updates food reviews'''
-
+    cursor = connection.cursor()
     try:
         user_name = input('whats your user_name?: ' )
         user_name = user_name.lower()
