@@ -27,7 +27,6 @@ while True:
                     break
                 else:
                     print('be more blunt please :D')
-
         elif answer_2 == 2:
             while True:
                 answer = input('do you have a user?: ')
