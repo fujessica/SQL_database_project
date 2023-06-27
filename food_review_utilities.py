@@ -26,7 +26,7 @@ def show_food_reviews(connection):
     result = cursor.fetchall()
     print(f"{'username':<25}{'dish_name'<30}{'date.':<20}{'review'}")
     for item in result:
-            print(f"{item[0]:<25}{item[1]:<20}{item[2]:<20}{item[3]}")     
+        print(f"{item[0]:<25}{item[1]:<20}{item[2]:<20}{item[3]}")     
 
 
 def search_menu(connection):
@@ -51,7 +51,7 @@ def search_menu(connection):
         for item in result:
             print(f"{item[0]:<40}{item[1]:<15}{item[2]:<30}")
     except:
-         print("sin city wasn't made for you:/ ")
+        print("sin city wasn't made for you:/ ")
 
 
 def search_food_review(connection):
@@ -76,7 +76,7 @@ def search_food_review(connection):
         for item in result:
             print(f"{item[3]:<20}{item[0]:<20}{item[1]:<30}{item[2]:<40}")
     except:
-         print("sin sin vity wasn't made for you")
+        print("sin sin vity wasn't made for you")
 
 
 def insert_user_food_review(connection):
@@ -116,8 +116,10 @@ def insert_review_food_review(connection):
         sql_2 = 'insert into reviews(dish_id, user_id, date, review) values (?,?,?,?)'
         cursor.execute(sql_2, list_2)
         connection.commit()
-    except:
-         print("sin city wasnt made for you")
+    except Exception as err:
+        print("sin city wasnt made for you")
+        print(f"Uexpected {err=}, {type(err)=}")
+        raise
 
 
 
@@ -143,7 +145,7 @@ def delete_food_reviews(connection):
         cursor.execute(sql, list)
         connection.commit()
     except:
-         print("sin city wasn't made for you")
+        print("sin city wasn't made for you")
 
 
 def update_food_review(connection):
@@ -169,58 +171,58 @@ def update_food_review(connection):
         cursor.execute(sql, list_1)
         connection.commit()
     except:
-         print("sin city wasn't made for you")
+        print("sin city wasn't made for you")
 
 
 
 
-while True:
-    answer = input('what would you like to do with? 1. menu 2. reviews 3. exit?: ')
-    if answer == '1':
-        answer_1 = input('would you like to search?(yes or no): ').lower()
-        if 'y' in answer_1:
-            search_menu(connection)
-        else:
-            show_menu(connection)
-    elif answer == '2':
-        list_1 = {1: 'show', 2: 'edit'}
-        answer_2 = int(input('would you like to 1. see or 2. edit?: '))
-        if answer_2 == 1:
-            while True:
-                answer = input('wanna search?(yes or no): ').lower()
-                if 'y' in answer:
-                    search_food_review(connection)
-                    break
-                elif 'n' in answer:
-                    show_food_reviews(connection)
-                    break
-                else:
-                    print('be more blunt please :D')
-        elif answer_2 == 2:
-            while True:
-                answer = input('do you have a user?(yes or no): ')
-                if 'y' in answer:
-                    answer = input('what would you like to do? 1: create a review, 2: delete a review, 3: update a review?: ')
-                    if answer == '1':
-                        insert_review_food_review(connection)
-                        break
-                    elif answer == '2':
-                        delete_food_reviews(connection)
-                        break
-                    elif answer == '3':
-                        update_food_review(connection)
-                        break
-                    else:
-                        print("kys")
-                        break
-                elif 'n' in answer:
-                    insert_user_food_review(connection)
-                else:
-                    print('be more blunt please')
-        else: 
-            print('fadijfasdfds')
-    else:
-        break
+# while True:
+#     answer = input('what would you like to do with? 1. menu 2. reviews 3. exit?: ')
+#     if answer == '1':
+#         answer_1 = input('would you like to search?(yes or no): ').lower()
+#         if 'y' in answer_1:
+#             search_menu(connection)
+#         else:
+#             show_menu(connection)
+#     elif answer == '2':
+#         list_1 = {1: 'show', 2: 'edit'}
+#         answer_2 = int(input('would you like to 1. see or 2. edit?: '))
+#         if answer_2 == 1:
+#             while True:
+#                 answer = input('wanna search?(yes or no): ').lower()
+#                 if 'y' in answer:
+#                     search_food_review(connection)
+#                     break
+#                 elif 'n' in answer:
+#                     show_food_reviews(connection)
+#                     break
+#                 else:
+#                     print('be more blunt please :D')
+#         elif answer_2 == 2:
+#             while True:
+#                 answer = input('do you have a user?(yes or no): ')
+#                 if 'y' in answer:
+#                     answer = input('what would you like to do? 1: create a review, 2: delete a review, 3: update a review?: ')
+#                     if answer == '1':
+#                         insert_review_food_review(connection)
+#                         break
+#                     elif answer == '2':
+#                         delete_food_reviews(connection)
+#                         break
+#                     elif answer == '3':
+#                         update_food_review(connection)
+#                         break
+#                     else:
+#                         print("kys")
+#                         break
+#                 elif 'n' in answer:
+#                     insert_user_food_review(connection)
+#                 else:
+#                     print('be more blunt please')
+#         else: 
+#             print('fadijfasdfds')
+#     else:
+#         break
 
 
 #I still need to figure out how to use a utilities and create some more loops btw
