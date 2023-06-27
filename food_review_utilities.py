@@ -98,13 +98,13 @@ def insert_review_food_review(connection):
     '''creates new food reviews'''
 
     try:
-        dish_name = input('what is the name of the dish?: ')
+        dish_name = input('what is the name of the dish?: ').lower()
         sql_1 = 'select dish_id from dishes where lower(dish_name) = ?'
         cursor.execute(sql_1, [dish_name])
         dish_id = cursor.fetchone()[0]
         user_name = input('whats your user_name?: ' )
         user_name = user_name.lower()
-        password = getpass()
+        password = input('whats your password')
         list = [user_name, password] 
         #verifies that the account is valid
         sql = 'select user_id from users where lower(user_name) = ? and password = ?'
@@ -126,7 +126,6 @@ def delete_food_reviews(connection):
 
     try: 
         dish_name = input('what is the name of the dish?: ')
-        dish_name = dish_name.lower()
         sql_1 = 'select dish_id from dishes where lower(dish_name) = ?'
         cursor.execute(sql_1, [dish_name])
         dish_id = cursor.fetchone()[0]
