@@ -1,4 +1,6 @@
-import sqlite3
+
+'''utilities'''
+
 
 def show_menu(connection):
     '''shows items in the menu'''
@@ -6,9 +8,9 @@ def show_menu(connection):
     sql = "select * from dishes"
     cursor.execute(sql)
     result = cursor.fetchall()
-    print(f"{'Dish name':<25}{'Desc.':<60}{'Price':<20}{'Dietary Info'}")
+    print(f"{'Dish name':<45}{'Desc.':<80}{'Price':<20}{'Dietary Info'}")
     for item in result:
-        print(f"{item[1]:<25}{item[2]:<60}{item[3]:<20}{item[4]}")     
+        print(f"{item[1]:<45}{item[2]:<80}{item[3]:<20}{item[4]}")     
 
 
 def show_food_reviews(connection):
@@ -17,9 +19,11 @@ def show_food_reviews(connection):
     sql = "select user_name, dish_name, date, review from reviews_vw"
     cursor.execute(sql)
     result = cursor.fetchall()
-    print(f"{'username':<25}{'dish_name'<30}{'date.':<20}{'review'}")
+    print(f"{'username':<25}{'dish_name':<30}{'date':<20}{'review'}")
+    #displays headings
     for item in result:
-        print(f"{item[0]:<25}{item[1]:<20}{item[2]:<20}{item[3]}")     
+        print(f"{item[0]:<25}{item[1]:<20}{item[2]:<20}{item[3]}")
+        #prints items 
 
 
 def search_menu(connection):
@@ -29,7 +33,7 @@ def search_menu(connection):
         prompt = {1: 'dish_name', 2: 'price', 3: 'dietary_info'}
         answer_1 = int(input("select out of 1. dish_name, 2. price budget, 3. dietary_info: "))
         answer_2 = input("please enter value for {}: ".format(prompt[answer_1])).lower() 
-        #chooses what to search with 
+        #chooses what to enter into the search
         if answer_1 == 1:
             sql = 'select dish_name, price from dishes where lower(dish_name) = ?'
         elif answer_1 == 2:
@@ -37,6 +41,7 @@ def search_menu(connection):
             answer_2 = int(answer_2)
         elif answer_1 == 3:
             answer_2 = '%' + answer_2 + '%'
+            #enables the 'like' function in sql 
             sql = 'select dish_name, price from dishes where lower(dietary_information) like ?'
         cursor.execute(sql, [answer_2])
         result = cursor.fetchall()
@@ -82,6 +87,7 @@ def insert_user_food_review(connection):
     #gets all information needed and then creates a new user
     list = [user_name, gmail, phone_number, password]
     sql = 'insert into users(user_name, gmail, phone_number, password) values (?,?,?,?)'
+    #creates new user
     cursor.execute(sql, list)
     connection.commit()
 
@@ -109,10 +115,8 @@ def insert_review_food_review(connection):
         sql_2 = 'insert into reviews(dish_id, user_id, date, review) values (?,?,?,?)'
         cursor.execute(sql_2, list_2)
         connection.commit()
-    except Exception as err:
+    except:
         print("sin city wasnt made for you")
-        print(f"Uexpected {err=}, {type(err)=}")
-        raise
 
 
 
@@ -157,6 +161,7 @@ def update_food_review(connection):
         dish_name = dish_name.lower()
         sql_1 = 'select dish_id from dishes where lower(dish_name) = ?'
         cursor.execute(sql_1, [dish_name])
+        #gets dish id and user id
         dish_id = cursor.fetchone()[0]
         review = input('whats the review now?: ')
         list_1 = [review, user_id, dish_id]
