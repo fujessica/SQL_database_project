@@ -55,10 +55,12 @@ while True:
                                     break
                                 else:
                                     print("no")
+                                break
                         elif 'n' in users:
                             insert_user_food_review(connection)
                         else:
                             print('be more blunt please')
+                        break
                 else: 
                     print('sorry, dont understand your answer.')
                 break

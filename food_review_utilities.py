@@ -35,14 +35,13 @@ def search_menu(connection):
         answer_2 = input("please enter value for {}: ".format(prompt[answer_1])).lower() 
         #chooses what to enter into the search
         if answer_1 == 1:
-            sql = 'SELECT dish_name, price FROM dishes WHERE lower(dish_name) = ?'
+            sql = 'SELECT dish_name, price, dietary_information FROM dishes WHERE lower(dish_name) = ?'
         elif answer_1 == 2:
-            sql = 'SELECT dish_name, price FROM dishes WHERE price <= ?'
-            answer_2 = int(answer_2)
+            sql = 'SELECT dish_name, price, dietary_information  FROM dishes WHERE price <= ?'
         elif answer_1 == 3:
             answer_2 = '%' + answer_2 + '%'
             #enables the 'like' function in sql 
-            sql = 'SELECT dish_name, price FROM dishes WHERE lower(dietary_information) LIKE ?'
+            sql = 'SELECT dish_name, price, dietary_information FROM dishes WHERE lower(dietary_information) LIKE ?'
         cursor.execute(sql, [answer_2])
         result = cursor.fetchall()
         print(f"{'dish_name':<40}{'price':<15}{'dietary_info':<30}")
@@ -125,6 +124,7 @@ def delete_food_reviews(connection):
     cursor = connection.cursor()
     try: 
         dish_name = input('what is the name of the dish?: ')
+        dish_name = dish_name.lower()
         sql_1 = 'SELECT dish_id FROM dishes WHERE lower(dish_name) = ?'
         cursor.execute(sql_1, [dish_name])
         dish_id = cursor.fetchone()[0]
@@ -170,3 +170,5 @@ def update_food_review(connection):
         connection.commit()
     except:
         print("sin city wasn't made for you")
+
+#atethat
