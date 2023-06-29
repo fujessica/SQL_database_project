@@ -172,3 +172,20 @@ def update_food_review(connection):
         print("sin city wasn't made for you")
 
 #atethat
+
+
+def search_food_review1(connection):
+    '''searches in the food reviews'''
+    cursor = connection.cursor()
+    try:
+        answer_1 = input('please enter value: ')
+        answer_1 = answer_1.lower()
+        #category to search in 
+        sql = 'SELECT user_name, date, review, dish_name FROM reviews_vw WHERE lower(dish_name) = ?'
+        cursor.execute(sql, [answer_1])
+        result = cursor.fetchall()
+        print(f"{'dish_name ':<30}{'user_name':<20}{'date':<15}{'review':<40}")
+        for item in result:
+            print(f"{item[3]:<30}{item[0]:<20}{item[1]:<15}{item[2]:<40}")
+    except:
+        print("sin sin vity wasn't made for you")
