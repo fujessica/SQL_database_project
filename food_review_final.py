@@ -23,7 +23,7 @@ while True:
     elif choice_1 == '2':
         while True:
             choice_2 = input('would you like to 1. see or 2. edit?: ').lower()
-            confirmation = input('are you sure? (y/n): ')
+            confirmation = input('are you sure? (y/n): ').lower()
             if 'y' in confirmation:
                 if choice_2 == '1':
                     while True:

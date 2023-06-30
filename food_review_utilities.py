@@ -84,17 +84,22 @@ def search_food_review(connection):
 
 def insert_user_food_review(connection):
     '''creates new users'''
-    cursor = connection.cursor()
-    user_name = input('enter a user_name: ')
-    gmail = input('enter a gmail: ')
-    phone_number = input('enter a phone_number: ')
-    password = input('enter a password: ')
-    #gets all information needed AND then creates a new user
-    list = [user_name, gmail, phone_number, password]
-    sql = 'INSERT INTO users(user_name, gmail, phone_number, password) VALUES (?,?,?,?)'
-    #creates new user
-    cursor.execute(sql, list)
-    connection.commit()
+    while True:
+        try:
+            cursor = connection.cursor()
+            user_name = input('enter a user_name: ')
+            gmail = input('enter a gmail: ')
+            phone_number = input('enter a phone_number: ')
+            password = input('enter a password: ')
+            #gets all information needed AND then creates a new user
+            list = [user_name, gmail, phone_number, password]
+            sql = 'INSERT INTO users(user_name, gmail, phone_number, password) VALUES (?,?,?,?)'
+            #creates new user
+            cursor.execute(sql, list)
+            connection.commit()
+            break
+        except:
+            print('username taken, probably try again')
 
 
 def insert_review_food_review(connection):
@@ -117,7 +122,7 @@ def insert_review_food_review(connection):
         date = input('wots the date: ')
         #gets date and review
         list_2 = [dish_id, user_id, date, review]
-        sql_2 = 'insert into reviews(dish_id, user_id, date, review) values (?,?,?,?)'
+        sql_2 = 'INSERT INTO reviews(dish_id, user_id, date, review) VALUES (?,?,?,?)'
         cursor.execute(sql_2, list_2)
         connection.commit()
     except:
