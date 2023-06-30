@@ -8,7 +8,7 @@ connection = sqlite3.connect(database_file)
 '''final code'''
 
 while True:
-    choice_1 = input('what would you like to do with? 1. menu 2. reviews 3. exit?: ')
+    choice_1 = input('what would you like to do with? 1. menu 2. reviews 3. exit?: ').lower()
     if choice_1 == '1':
         while True:
             menu_search = input('would you like to search? (y/n): ').lower()
@@ -22,7 +22,7 @@ while True:
                 print("try again")
     elif choice_1 == '2':
         while True:
-            choice_2 = input('would you like to 1. see or 2. edit?: ')
+            choice_2 = input('would you like to 1. see or 2. edit?: ').lower()
             confirmation = input('are you sure? (y/n): ')
             if 'y' in confirmation:
                 if choice_2 == '1':
@@ -38,7 +38,7 @@ while True:
                             print('be more blunt please :D')
                 elif choice_2 == '2':
                     while True:
-                        users = input('do you have a user? (y/n): ')
+                        users = input('do you have a user? (y/n): ').lower()
                         if 'y' in users:
                             while True:
                                 choice_3 = input('what would you like to do? 1: create a review, 2: delete a review, 3: update a review, 4: back?: ')

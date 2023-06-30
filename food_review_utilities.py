@@ -38,7 +38,7 @@ def search_menu(connection):
             sql = 'SELECT dish_name, price, dietary_information FROM dishes WHERE lower(dish_name) = ?'
         elif answer_1 == 2:
             sql = 'SELECT dish_name, price, dietary_information  FROM dishes WHERE price <= ?'
-        elif answer_1 == 3:
+        elif  answer_1 == 3:
             answer_2 = '%' + answer_2 + '%'
             #enables the 'like' function in sql 
             sql = 'SELECT dish_name, price, dietary_information FROM dishes WHERE lower(dietary_information) LIKE ?'
